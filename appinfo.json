@@ -8,8 +8,11 @@
   "watchapp": {
     "watchface": false
   },
-  "appKeys": {
-    "dummy": 0
+  "appKeys" : {
+    "message_type" : 0,
+    "track_screen_name" : 1,
+    "track_event_category" : 2,
+    "track_event_action" : 3
   },
   "resources": {
     "media": []
