@@ -1,7 +1,7 @@
 pebble-analytics
 ================
 
-Google Analytics implementation for Pebble smartwatch. Supports screen and event tracking.
+Google Analytics implementation for Pebble smartwatch. Supports screen and event tracking. It uses the Google Analytics [Measurement Protocol](https://developers.google.com/analytics/devguides/collection/protocol/v1/devguide#apptracking). Your Analytics property has to be a Mobile App Propery to work with this.
 
 ## Usage
 
