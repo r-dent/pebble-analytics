@@ -11,24 +11,15 @@ If you want to use it in your own project, take the following steps:
 
 ###On the JS side
 
-First copy contents of __pebble-ga.js__ to the beginning of __pebble-js-app.js__
-
-Then initialize an analytics object like this:
-
-    var ga = new Analytics('UA-1234567-0', 'myApp', '1.0.0');
-
-Track events or screen with like this:
-
-    ga.trackScreen('screen name');
-    ga.trackEvent('category', 'action');
+ 1. Copy contents of __pebble-ga.js__ to the beginning of __pebble-js-app.js__
+ 2. Initialize an analytics object like this: `var ga = new Analytics('UA-1234567-0', 'myApp', '1.0.0');`
+ 3. Track events or screens with `ga.trackScreen('screen name');` or `ga.trackEvent('category', 'action');`
 
 ###On the C side
 
-Copy ga.h and ga.c to your src/ folder and include ga.h in your primary app file. Then set up app messages by calling __app_message_open()__.
-
-You can then track stuff like this:
-
-    trackScreen("screen name");
-    trackEvent("category", "action");
+ 1. Copy __ga.h__ and __ga.c__ to your __src/__ folder
+ 2. Include ga.h in your primary app file `#include <ga.h>`
+ 3. Set up app messages. E.g. by calling `app_message_open(128, 128)`
+ 4. Track events or screens with `trackScreen("screen name");` or `trackEvent("category", "action");`
     
 Keep in mind that you are responsible of handling messages. If you track to many times in a short interval on the watch, the messages could get lost. I recommend implementing some sort of message queue.
