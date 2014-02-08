@@ -5,6 +5,10 @@ Google Analytics implementation for Pebble smartwatch. Supports screen and event
 
 ## Usage
 
+This project could be used as a demo of on the watch. Just download it, change the Analytics ID in pebble-js-app.js with your own, build and install. Whenn you press the UP, DOWN and SELECT buttons, you should see Events in your Google Analytics realtime view.
+
+If you want to use it in your own project, take the following steps:
+
 ###On the JS side
 
 First copy contents of __pebble-ga.js__ to the beginning of __pebble-js-app.js__
