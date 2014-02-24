@@ -7,7 +7,18 @@ var Analytics = function(analyticsId, appName, appVersion) {
   this.analyticsId = analyticsId;
   this.appName = appName;
   this.appVersion = appVersion;
-  this.analyticsUserId = Math.round(Math.random() * 10000000);
+  this.accountToken = Pebble.getAccountToken();
+  
+  if (this.accountToken.length > 0) {
+    this.analyticsUserId = this.accountToken;
+  }
+  else {
+    this.analyticsUserId = window.localStorage.getItem('analyticsUserId');
+    if (this.analyticsUserId == undefined) {
+      this.analyticsUserId = Math.round(Math.random() * 1000000000);
+      window.localStorage.setItem('analyticsUserId', this.analyticsUserId);
+    }
+  }
 }
 
 Analytics.prototype._trackGA = function(type, params) {
