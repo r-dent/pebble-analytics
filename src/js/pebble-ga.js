@@ -2,7 +2,7 @@ var Analytics = function(analyticsId, appName, appVersion) {
   this.analyticsId = analyticsId;
   this.appName = appName;
   this.appVersion = appVersion;
-  this.analyticsUserId = Math.round(Math.random() * 10000000);
+  this.analyticsUserId = Pebble.getAccountToken();
 }
 
 Analytics.prototype._trackGA = function(type, params) {
