@@ -2,7 +2,27 @@ var Analytics = function(analyticsId, appName, appVersion) {
   this.analyticsId = analyticsId;
   this.appName = appName;
   this.appVersion = appVersion;
-  this.analyticsUserId = Math.round(Math.random() * 10000000);
+  var watch = Pebble.getActiveWatchInfo ? Pebble.getActiveWatchInfo() : null;
+  var userAgent = 'Mozilla/5.0';
+  if (watch) {
+      var fw = watch.firmware;
+      var fw_ver = fw.major + '.' + fw.minor + '.' + fw.patch + (fw.suffix ? '-' + fw.suffix : '');
+      userAgent += ' (Pebble; ' + watch.platform + ' ' + fw_ver + '; ' + watch.model + '; ' + watch.language + ') PebbleKitJS/' + fw_ver;
+  } else {
+      userAgent += ' (Pebble; unknown) PebbleKitJS/unknown';
+  }
+  console.log("User-Agent", userAgent);
+  this.userAgent = userAgent;
+  var accountToken = Pebble.getAccountToken();
+  if (accountToken.length > 0) {
+    this.analyticsUserId = accountToken;
+  } else {
+    this.analyticsUserId = window.localStorage.getItem('analyticsUserId');
+    if (this.analyticsUserId == undefined) {
+      this.analyticsUserId = Math.round(Math.random() * 1000000000);
+      window.localStorage.setItem('analyticsUserId', this.analyticsUserId);
+    }
+  }
 }
 
 Analytics.prototype._trackGA = function(type, params) {
@@ -22,8 +42,10 @@ Analytics.prototype._trackGA = function(type, params) {
   }
 
   req.open('POST', url, true);
-  req.setRequestHeader('Content-length', trackingParams.length);
+  req.setRequestHeader('User-Agent', this.userAgent);
+  req.setRequestHeader('Content-Length', trackingParams.length);
   req.send(trackingParams);
+  console.log('tracking', type, JSON.stringify(params));
 }
 
 Analytics.prototype.trackScreen = function (screenName) {
@@ -34,5 +56,4 @@ Analytics.prototype.trackEvent = function (category, action) {
   this._trackGA('event', {'ec': category, 'ea': action});
 }
 
-// If require() will work some day. This would be nessecary.
-// module.exports.Analytics = Analytics;
+module.exports = Analytics;
