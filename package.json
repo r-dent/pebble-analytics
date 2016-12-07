@@ -1,0 +1,32 @@
+{
+  "name": "pebble-analytics",
+  "version": "1.0.0",
+  "author": "Roman Gille",
+  "private": true,
+  "dependencies": {},
+  "keywords": [
+    "google analytics"
+  ],
+  "pebble": {
+    "displayName": "Pebble Analytics",
+    "sdkVersion": "3",
+    "projectType": "native",
+    "uuid": "97331fa6-4390-4a8f-83df-cdbc09e67805",
+    "enableMultiJS": true,
+    "messageKeys": {
+      "message_type" : 0,
+      "track_screen_name" : 1,
+      "track_event_category" : 2,
+      "track_event_action" : 3
+    },
+    "watchapp": {
+      "onlyShownOnCommunication": false,
+      "hiddenApp": false,
+      "watchface": false
+    },
+    "targetPlatforms": [
+      "aplite"
+    ],
+    "capabilities": []
+  }
+}

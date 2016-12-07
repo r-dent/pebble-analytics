@@ -1,7 +1,7 @@
 #include <pebble.h>
 
 // Include the header to have access to the tracking methods.
-#include <ga.h>
+#include "ga.h"
 
 static Window *window;
 static TextLayer *text_layer;
